@@ -15,7 +15,7 @@ export default function Navbar() {
         disabled:pointer-events-none disabled:opacity-50 border 
         border-input bg-background hover:bg-slate-100 h-9 rounded-md px-3"
         to="/create">
-          Create Employee
+          Add User
         </NavLink>
       </nav>
     </div>

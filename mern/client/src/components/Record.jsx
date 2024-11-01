@@ -4,8 +4,9 @@ import { useParams, useNavigate } from "react-router-dom";
 export default function Record() {
   const [form, setForm] = useState({
     name: "",
-    position: "",
-    level: "",
+    email: "",
+    status: "",
+    dob: "",
   });
   const [isNew, setIsNew] = useState(true);
   const params = useParams();
@@ -45,6 +46,7 @@ export default function Record() {
   async function onSubmit(e) {
     e.preventDefault();
     const person = { ...form };
+    console.log(person);
     try {
       let response;
       if (isNew) {
@@ -78,7 +80,7 @@ export default function Record() {
       console.error('A problem occurred with your fetch operation: ', 
         error);
     } finally {
-      setForm({ name: "", position:"", level: "" });
+      setForm({ name: "", email:"", status: "", dob: "" });
       navigate("/");
     }
   }
@@ -87,7 +89,7 @@ export default function Record() {
   return (
     <>
       <h3 className="text-lg font-semibold p-4">
-        Create/Update Employee Record
+        Create/Update User Record
       </h3>
       <form
         onSubmit={onSubmit}
@@ -98,7 +100,7 @@ border-slate-900/10 pb-12 md:grid-cols-2">
           <div>
             <h2 className="text-base font-semibold leading-7 
 text-slate-900">
-              Employee Info
+              User Info
             </h2>
             <p className="mt-1 text-sm leading-6 text-slate-600">
               This information will be displayed publicly so be careful 
@@ -135,11 +137,11 @@ sm:leading-6"
             </div>
             <div className="sm:col-span-4">
               <label
-                htmlFor="position"
+                htmlFor="email"
                 className="block text-sm font-medium leading-6 
 text-slate-900"
               >
-                Position
+                Email
               </label>
               <div className="mt-2">
                 <div className="flex rounded-md shadow-sm ring-1 ring-inset
@@ -147,15 +149,43 @@ ring-slate-300 focus-within:ring-2 focus-within:ring-inset
 focus-within:ring-indigo-600 sm:max-w-md">
                   <input
                     type="text"
-                    name="position"
-                    id="position"
+                    name="email"
+                    id="email"
                     className="block flex-1 border-0 bg-transparent py-1.5
 pl-1 text-slate-900 placeholder:text-slate-400 focus:ring-0 sm:text-sm 
 sm:leading-6"
-                    placeholder="Developer Advocate"
-                    value={form.position}
+                    placeholder="example@gmail.com"
+                    value={form.email}
                     onChange={(e) => updateForm(
-                      { position: e.target.value }
+                      { email: e.target.value }
+                    )}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="sm:col-span-4">
+              <label
+                htmlFor="dob"
+                className="block text-sm font-medium leading-6 
+text-slate-900"
+              >
+                Date of Birth
+              </label>
+              <div className="mt-2">
+                <div className="flex rounded-md shadow-sm ring-1 ring-inset
+ring-slate-300 focus-within:ring-2 focus-within:ring-inset 
+focus-within:ring-indigo-600 sm:max-w-md">
+                  <input
+                    type="date"
+                    name="dob"
+                    id="dob"
+                    className="block flex-1 border-0 bg-transparent py-1.5
+pl-1 text-slate-900 placeholder:text-slate-400 focus:ring-0 sm:text-sm 
+sm:leading-6"
+                    placeholder=""
+                    value={form.dob}
+                    onChange={(e) => updateForm(
+                      { dob: e.target.value }
                     )}
                   />
                 </div>
@@ -163,53 +193,53 @@ sm:leading-6"
             </div>
             <div>
               <fieldset className="mt-4">
-                <legend className="sr-only">Position Options</legend>
+                <legend className="sr-only">Status</legend>
                 <div className="space-y-4 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
                   <div className="flex items-center">
                     <input
-                      id="positionIntern"
-                      name="positionOptions"
+                      id="statusActive"
+                      name="statusOptions"
                       type="radio"
-                      value="Intern"
+                      value="Active"
                       className="h-4 w-4 border-slate-300 text-slate-600 focus:ring-slate-600 cursor-pointer"
-                      checked={form.level === "Intern"}
-                      onChange={(e) => updateForm({ level: e.target.value })}
+                      checked={form.status === "Active"}
+                      onChange={(e) => updateForm({ status: e.target.value })}
                     />
                     <label
-                      htmlFor="positionIntern"
+                      htmlFor="statusActive"
                       className="ml-3 block text-sm font-medium leading-6 text-slate-900 mr-4"
                     >
-                      Intern
+                      Active
                     </label>
                     <input
-                      id="positionJunior"
-                      name="positionOptions"
+                      id="statusInactive"
+                      name="statusOptions"
                       type="radio"
-                      value="Junior"
+                      value="Inactive"
                       className="h-4 w-4 border-slate-300 text-slate-600 focus:ring-slate-600 cursor-pointer"
-                      checked={form.level === "Junior"}
-                      onChange={(e) => updateForm({ level: e.target.value })}
+                      checked={form.status === "Inactive"}
+                      onChange={(e) => updateForm({ status: e.target.value })}
                     />
                     <label
-                      htmlFor="positionJunior"
+                      htmlFor="statusInactive"
                       className="ml-3 block text-sm font-medium leading-6 text-slate-900 mr-4"
                     >
-                      Junior
+                      Inactive
                     </label>
                     <input
-                      id="positionSenior"
-                      name="positionOptions"
+                      id="statusArchived"
+                      name="statusOptions"
                       type="radio"
-                      value="Senior"
+                      value="Archived"
                       className="h-4 w-4 border-slate-300 text-slate-600 focus:ring-slate-600 cursor-pointer"
-                      checked={form.level === "Senior"}
-                      onChange={(e) => updateForm({ level: e.target.value })}
+                      checked={form.status === "Archived"}
+                      onChange={(e) => updateForm({ status: e.target.value })}
                     />
                     <label
-                      htmlFor="positionSenior"
+                      htmlFor="statusArchived"
                       className="ml-3 block text-sm font-medium leading-6 text-slate-900 mr-4"
                     >
-                      Senior
+                      Archived
                     </label>
                   </div>
                 </div>
@@ -219,7 +249,7 @@ sm:leading-6"
         </div>
         <input 
           type="submit"
-          value="Save Employee Record"
+          value="Save User Record"
           className="inline-flex items-center justify-center 
 whitespace-nowrap text-md font-medium ring-offset-background 
 transition-colors focus-visible:outline-none focus-visible:ring-2 

@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
 
-const Record = (props) => {
+const Record = (props) => (
   <tr className="border-b transition-colors hover:bg-muted/50 
   data-[state=selected]:bg-muted">
     <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
       {props.record.name}
     </td>
     <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
-      {props.record.position}
+      {props.record.email}
     </td>
     <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
-      {props.record.level}
+      {props.record.status}
+    </td>
+    <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
+      {props.record.dob}
     </td>
     <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
       <div className="flex gap-2">
@@ -46,6 +50,17 @@ rounded-md px-3"
       </div>
     </td>
   </tr>
+);
+
+Record.propTypes = {
+  record: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    dob: PropTypes.string.isRequired,
+  }).isRequired,
+  deleteRecord: PropTypes.func.isRequired,
 };
 
 export default function RecordList() {
@@ -105,11 +120,15 @@ text-muted-foreground [&:has([role=checkbox])]:pr-0">
                 </th>
                 <th className="h-12 px-4 text-left align-middle font-medium
 text-muted-foreground [&:has([role=checkbox])]:pr-0">
-                  Position
+                  Email
                 </th>
                 <th className="h-12 px-4 text-left align-middle font-medium
 text-muted-foreground [&:has([role=checkbox])]:pr-0">
-                  Level
+                  Status
+                </th>
+                <th className="h-12 px-4 text-left align-middle font-medium
+text-muted-foreground [&:has([role=checkbox])]:pr-0">
+                  Date of Birth
                 </th>
                 <th className="h-12 px-4 text-left align-middle font-medium
 text-muted-foreground [&:has([role=checkbox])]:pr-0">

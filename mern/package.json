@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "concurrently": "^9.0.1",
+    "nodemon": "^3.1.7"
+  },
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon --env-file=server/config.env server/server.js",
+    "client": "cd client && npm run dev"
+  }
+}
