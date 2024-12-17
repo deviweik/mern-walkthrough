@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import App from "./App";
 import Record from "./components/Record";
+import User from "./components/User";
 import RecordList from "./components/RecordList";
 import "./index.css";
 
@@ -17,6 +18,16 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <RecordList />,
+      },
+    ],
+  },
+  {
+    path: "/view/:id",
+    element: <App />,
+    children: [
+      {
+        path: "/view/:id",
+        element: <User />,
       },
     ],
   },
